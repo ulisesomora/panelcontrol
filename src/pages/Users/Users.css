@@ -7,3 +7,45 @@
     grid-template-columns: repeat(3, calc(100% / 3));
     gap: 0.1rem;
   }
+
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .actions-bar{
+    display: flex;
+    justify-content: center;
+    margin: 12px;
+  }
+  .actions-bar button{
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+  }
+
+  @media (min-width: 768px) {
+    .users-grid {
+      grid-template-columns:
+        repeat(6, 1fr);
+        gap: 1rem;
+    }
+  
+    .filters {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .users-grid {
+      grid-template-columns:
+        repeat(8, 1fr);
+    }
+    .actions-bar{
+      display: flex;
+      justify-content: center;
+      margin: 12px;
+    }
+  }
