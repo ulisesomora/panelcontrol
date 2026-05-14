@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getUsers } from '../../api/usersApi'
+import { useMessages } from '../../hooks/useMessages'
 
 import Loader from '../../components/Loader/Loader'
 
@@ -9,6 +10,7 @@ import './UserDetail.css'
 const UserDetail = () => {
   const { id } = useParams()
 
+  const { getMessagesByUser } = useMessages()
 
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -40,6 +42,11 @@ const UserDetail = () => {
 
     loadUser()
   }, [id])
+
+  //Mensajes del usuario
+  const messages = user
+  ? getMessagesByUser(user.login.uuid)
+  : []
 
   if (loading) return <Loader />
   if (error) {
@@ -87,6 +94,32 @@ const UserDetail = () => {
         <p>Nacionalidad: {user.nat}</p>
       </div>
 
+      {/* Mensajes que enviaron */}
+
+      <div className="messages-section">
+
+        <h2>Mensajes enviados</h2>
+
+        {messages.length === 0 ? (
+          <p>No hay mensajes enviados a este usuario</p>
+        ) : (
+          messages.map((msg) => (
+            <div
+              key={msg.id}
+              className="message-item"
+            >
+              <p>{msg.message}</p>
+
+              <small>
+                {new Date(
+                  msg.createdAt
+                ).toLocaleString()}
+              </small>
+            </div>
+          ))
+        )}
+
+      </div>
 
 
     </section>
