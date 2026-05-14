@@ -1,0 +1,53 @@
+/* CONTENEDOR PRINCIPAL */
+.filters {
+    background: white;
+    padding: 1rem;
+    border-radius: 14px;
+  
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  
+    margin-bottom: 1rem;
+  }
+
+  .filters select,
+.filters input {
+  padding: 0.7rem;
+  border-radius: 10px;
+
+  border: 1px solid #ddd;
+
+  font-size: 0.95rem;
+  outline: none;
+
+  transition: border 0.2s ease;
+}
+
+.filters select:focus,
+.filters input:focus {
+  border-color: #2563eb;
+}
+
+.filters label {
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 0.2rem;
+  }
+
+  @media (min-width: 768px) {
+    .filters {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+  
+    .filters select,
+    .filters input {
+      flex: 1;
+      min-width: 160px;
+    }
+  }
