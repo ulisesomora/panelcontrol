@@ -36,6 +36,12 @@ http://localhost:5173
 
 ---
 
+
+Ir a la ruta
+
+http://localhost:5173/login
+
+---
 # Credenciales de acceso
 
 Usuario: admin  
