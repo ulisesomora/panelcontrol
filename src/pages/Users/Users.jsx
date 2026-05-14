@@ -98,7 +98,8 @@ const Users = () => {
                 : 'Exportar CSV'}
             </button>
         </div>
-        {/* lISTA DE USUARIOS*/}
+
+        {/* LISTA DE USUARIOS*/}
         <main className='users-grid'>
             {
                 filteredUsers?.map(user=>(

@@ -1,5 +1,6 @@
 import React from 'react'
 import './UserCard.css'
+import { Link } from 'react-router-dom'
 
 const UserCard = ({user}) => {
   return (
@@ -15,6 +16,14 @@ const UserCard = ({user}) => {
         <span className="country">
           {user.location.country}
         </span>
+      </div>
+      <div className="actions">
+      <Link
+          className="detail-btn"
+          to={`/users/${user.login.uuid}`}
+        >
+          Ver detalle
+        </Link>
       </div>
     </article>
   )

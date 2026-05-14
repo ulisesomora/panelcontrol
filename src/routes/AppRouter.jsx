@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import Users from '../pages/Users/Users'
 import Login from '../pages/Login/Login'
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'
+import UserDetail from '../pages/UserDetail/UserDetail'
 
 const AppRouter = () => {
   return (
@@ -12,7 +13,11 @@ const AppRouter = () => {
         <ProtectedRoute>
           <Users />
         </ProtectedRoute>
-
+      } />
+      <Route path='/users/:id' element={
+        <ProtectedRoute>
+          <UserDetail />
+        </ProtectedRoute>
       } />
     </Routes>
   )
