@@ -10,7 +10,6 @@ const Login = () => {
 
     //llamamos el hook para el control de datos del context
     const {login} = useAuth()
-    console.log("Hola")
 
     const [form, setForm] = useState({
         username: '',

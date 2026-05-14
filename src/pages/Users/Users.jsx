@@ -1,24 +1,44 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getUsers } from '../../api/usersApi'
+import Loader from '../../components/Loader/Loader'
+import Header from '../../components/Header/Header'
+
+import './Users.css'
 
 const Users = () => {
+
+    const [users, setUsers] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function loadUsers() {
             try {
                 const data = await getUsers()
-                console.log(data)
+                setUsers(data)
             } catch (error) {
                 console.error("Error cargando usuarios", error)
+            }finally{
+                setLoading(false)
             }
         }
 
         loadUsers()
     }, [])
 
+    if (loading) return <Loader />
     return (
         <>
-            <h1>Hola, empezando prueba tecnica</h1>
+        <Header/>
+        <main className='users-grid'>
+            {
+                users?.map(user=>(
+                    <div>
+                        {user.name.first}
+                    </div>
+                ))
+            }
+
+        </main>
         </>
     )
 }

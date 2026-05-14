@@ -1,4 +1,4 @@
-const API_URL = 'https://randomuser.me/api/'
+const API_URL = 'https://randomuser.me/api/?results=30'
 
 const CACHE_KEY = 'users-cache';
 const CACHE_TIME_KEY = 'users-cache-time'
