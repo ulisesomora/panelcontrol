@@ -6,11 +6,15 @@ import Header from '../../components/Header/Header'
 import './Users.css'
 import UserCard from '../../components/UserCard/UserCard'
 import Filters from '../../components/Filters/Filters'
+import { exportUsersToCSV } from '../../Services/csvExport'
 
 const Users = () => {
 
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(true)
+
+     // exportación
+    const [exporting, setExporting] = useState(false)
 
     // filtros
     const [filters, setFilters] = useState({
@@ -43,6 +47,23 @@ const Users = () => {
     })
   }, [users, filters])
 
+
+  // EXPORTAR CSV (ASYNC UX)
+  async function handleExport() {
+    try {
+      setExporting(true)
+
+      await exportUsersToCSV(filteredUsers)
+
+      alert('Exportación completada correctamente')
+    } catch (error) {
+      console.error(error)
+      alert('Error al exportar usuarios')
+    } finally {
+      setExporting(false)
+    }
+  }
+
     useEffect(() => {
         async function loadUsers() {
             try {
@@ -66,6 +87,18 @@ const Users = () => {
             filters={filters}
             setFilters={setFilters}
         />
+        {/* BOTON DE EXPORTAR */}
+        <div className="actions-bar">
+            <button
+            onClick={handleExport}
+            disabled={exporting}
+            >
+            {exporting
+                ? 'Exportando usuarios...'
+                : 'Exportar CSV'}
+            </button>
+        </div>
+        {/* lISTA DE USUARIOS*/}
         <main className='users-grid'>
             {
                 filteredUsers?.map(user=>(
