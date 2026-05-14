@@ -2,17 +2,20 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { getUsers } from '../../api/usersApi'
 import Loader from '../../components/Loader/Loader'
 import Header from '../../components/Header/Header'
+import { useMessages } from '../../hooks/useMessages'
 
 import './Users.css'
 import UserCard from '../../components/UserCard/UserCard'
 import Filters from '../../components/Filters/Filters'
 import { exportUsersToCSV } from '../../Services/csvExport'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
+import MessageModal from '../../components/MessageModal/MessageModal'
 
 const Users = () => {
 
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
+  const { sendMessage } = useMessages()
 
   // exportación
   const [exporting, setExporting] = useState(false)
@@ -27,9 +30,23 @@ const Users = () => {
     // usuario seleccionado
     const [selectedUser, setSelectedUser] = useState(null)
 
-  //Modal
+  //Modales
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [showMessageModal, setShowMessageModal] = useState(false)
 
+  //Mensajes
+  function handleSendMessage(text) {
+    sendMessage(selectedUser.login.uuid, text)
+    setShowMessageModal(false)
+    setSelectedUser(null)
+  }
+
+  function handleMessageClick(user) {
+    setSelectedUser(user)
+    setShowMessageModal(true)
+  }
+
+  //filtros
   const filteredUsers = useMemo(() => {
     return users.filter((user) => {
       const matchesGender =
@@ -130,6 +147,7 @@ const Users = () => {
               key={user.login.uuid}
               user={user}
               onDelete={handleDeleteClick}
+              onMessage={handleMessageClick}
             />
           ))
         }
@@ -143,6 +161,17 @@ const Users = () => {
             setSelectedUser(null)
           }}
         />
+
+        {/* MODAL MENSAJES */}
+      <MessageModal
+        isOpen={showMessageModal}
+        user={selectedUser}
+        onSend={handleSendMessage}
+        onClose={() => {
+          setShowMessageModal(false)
+          setSelectedUser(null)
+        }}
+      />
       </main>
     </>
   )

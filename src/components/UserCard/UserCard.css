@@ -98,3 +98,12 @@
   .user-card:hover .delete-btn {
     opacity: 1;
   }
+  .msg-btn {
+    flex: 1;
+    border: none;
+    border-radius: 4px;
+    background: #10b981;
+    color: white;
+    cursor: pointer;
+    font-size: 0.6rem;
+  }

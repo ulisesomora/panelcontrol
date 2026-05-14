@@ -13,8 +13,6 @@ const UserDetail = () => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  console.log(user)
-  console.log(id)
 
   //Cargar Usuarios
   useEffect(() => {
@@ -26,7 +24,6 @@ const UserDetail = () => {
         const foundUser = users.find(
           (u) => u.login.uuid === id
         )
-        console.log(users)
         if (!foundUser) {
           setError('Usuario no encontrado')
           return

@@ -2,7 +2,8 @@ import React from 'react'
 import './UserCard.css'
 import { Link } from 'react-router-dom'
 
-const UserCard = ({user, onDelete}) => {
+const UserCard = ({user, onDelete,onMessage}) => {
+
   return (
     <article className='user-card'>
         {/* BOTÓN DELETE (hover) */}
@@ -31,6 +32,12 @@ const UserCard = ({user, onDelete}) => {
         >
           Ver detalle
         </Link>
+        <button
+          className="msg-btn"
+          onClick={() => onMessage(user)}
+        >
+          Mensaje
+        </button>
       </div>
     </article>
   )
