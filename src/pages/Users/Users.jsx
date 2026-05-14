@@ -7,22 +7,28 @@ import './Users.css'
 import UserCard from '../../components/UserCard/UserCard'
 import Filters from '../../components/Filters/Filters'
 import { exportUsersToCSV } from '../../Services/csvExport'
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 
 const Users = () => {
 
-    const [users, setUsers] = useState([])
-    const [loading, setLoading] = useState(true)
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
 
-     // exportación
-    const [exporting, setExporting] = useState(false)
+  // exportación
+  const [exporting, setExporting] = useState(false)
 
-    // filtros
-    const [filters, setFilters] = useState({
-        gender: '',
-        nationality: '',
-        minAge: '',
-        maxAge: '',
-    })
+  // filtros
+  const [filters, setFilters] = useState({
+    gender: '',
+    nationality: '',
+    minAge: '',
+    maxAge: '',
+  })
+    // usuario seleccionado
+    const [selectedUser, setSelectedUser] = useState(null)
+
+  //Modal
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
 
   const filteredUsers = useMemo(() => {
     return users.filter((user) => {
@@ -64,55 +70,82 @@ const Users = () => {
     }
   }
 
-    useEffect(() => {
-        async function loadUsers() {
-            try {
-                const data = await getUsers()
-                setUsers(data)
-            } catch (error) {
-                console.error("Error cargando usuarios", error)
-            }finally{
-                setLoading(false)
-            }
+  // ELIMINAR USUARIO
+  function handleDeleteClick(user) {
+    setSelectedUser(user)
+    setShowDeleteModal(true)
+  }
+
+  function confirmDelete() {
+    setUsers((prev) =>
+      prev.filter(
+        (u) => u.login.uuid !== selectedUser.login.uuid
+      )
+    )
+
+    setShowDeleteModal(false)
+    setSelectedUser(null)
+  }
+
+  useEffect(() => {
+    async function loadUsers() {
+      try {
+        const data = await getUsers()
+        setUsers(data)
+      } catch (error) {
+        console.error("Error cargando usuarios", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadUsers()
+  }, [])
+
+  if (loading) return <Loader />
+  return (
+    <>
+      <Header />
+      <Filters
+        filters={filters}
+        setFilters={setFilters}
+      />
+      {/* BOTON DE EXPORTAR */}
+      <div className="actions-bar">
+        <button
+          onClick={handleExport}
+          disabled={exporting}
+        >
+          {exporting
+            ? 'Exportando usuarios...'
+            : 'Exportar CSV'}
+        </button>
+      </div>
+
+      {/* LISTA DE USUARIOS*/}
+      <main className='users-grid'>
+        {
+          filteredUsers?.map(user => (
+            <UserCard
+              key={user.login.uuid}
+              user={user}
+              onDelete={handleDeleteClick}
+            />
+          ))
         }
 
-        loadUsers()
-    }, [])
-
-    if (loading) return <Loader />
-    return (
-        <>
-        <Header/>
-        <Filters
-            filters={filters}
-            setFilters={setFilters}
+        {/* MODAL CONFIRM DELETE */}
+        <ConfirmModal
+          isOpen={showDeleteModal}
+          onConfirm={confirmDelete}
+          onCancel={() => {
+            setShowDeleteModal(false)
+            setSelectedUser(null)
+          }}
         />
-        {/* BOTON DE EXPORTAR */}
-        <div className="actions-bar">
-            <button
-            onClick={handleExport}
-            disabled={exporting}
-            >
-            {exporting
-                ? 'Exportando usuarios...'
-                : 'Exportar CSV'}
-            </button>
-        </div>
-
-        {/* LISTA DE USUARIOS*/}
-        <main className='users-grid'>
-            {
-                filteredUsers?.map(user=>(
-                    <UserCard
-                    key={user.login.uuid}
-                    user={user}
-                     />
-                ))
-            }
-
-        </main>
-        </>
-    )
+      </main>
+    </>
+  )
 }
 
 export default Users

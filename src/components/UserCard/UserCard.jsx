@@ -2,9 +2,16 @@ import React from 'react'
 import './UserCard.css'
 import { Link } from 'react-router-dom'
 
-const UserCard = ({user}) => {
+const UserCard = ({user, onDelete}) => {
   return (
-    <article>
+    <article className='user-card'>
+        {/* BOTÓN DELETE (hover) */}
+        <button
+          className="delete-btn"
+          onClick={() => onDelete(user)}
+        >
+          ✕
+        </button>
         <img className="avatar" src={user.picture.medium} alt={`${user.name.first} ${user.name.last}`}/>
         <div className="info">
         <h3>

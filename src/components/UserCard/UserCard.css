@@ -67,3 +67,34 @@
     font-size: 0.6rem;
     text-decoration: none;
   }
+
+  /* hover card */
+  .user-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(1,1,0,0.5);
+  }
+  
+  /* DELETE BUTTON (solo hover) */
+  .delete-btn {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+  
+    width: 30px;
+    height: 30px;
+  
+    border: none;
+    border-radius: 50%;
+  
+    background: #ff4d4d;
+    color: white;
+  
+    cursor: pointer;
+  
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .user-card:hover .delete-btn {
+    opacity: 1;
+  }

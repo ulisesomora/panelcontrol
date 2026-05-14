@@ -1,0 +1,56 @@
+/* OVERLAY */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    z-index: 1000;
+  }
+  
+  /* MODAL */
+  .modal {
+    background: white;
+    width: 90%;
+    max-width: 420px;
+  
+    border-radius: 12px;
+    padding: 1.5rem;
+  
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  
+  /* TITULO */
+  .modal h2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* ACCIONES */
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+  }
+  
+  /* BOTONES */
+  .btn-danger {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .btn-secondary {
+    background: #e5e7eb;
+    color: #111;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
