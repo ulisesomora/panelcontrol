@@ -4,6 +4,7 @@ import Loader from '../../components/Loader/Loader'
 import Header from '../../components/Header/Header'
 
 import './Users.css'
+import UserCard from '../../components/UserCard/UserCard'
 
 const Users = () => {
 
@@ -32,9 +33,8 @@ const Users = () => {
         <main className='users-grid'>
             {
                 users?.map(user=>(
-                    <div>
-                        {user.name.first}
-                    </div>
+                    <UserCard
+                     user={user}/>
                 ))
             }
 
