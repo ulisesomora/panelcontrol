@@ -1,26 +1,10 @@
-import { useEffect, useState } from 'react'
+
 import './App.css'
-import { getUsers } from './api/usersApi'
+import AppRouter from './routes/AppRouter'
 
 function App() {
-
-  useEffect(()=>{
-    async function loadUsers() {
-      try{
-        const data = await getUsers()
-        console.log(data)
-      }catch(error){
-        console.error("Error cargando usuarios", error)
-      }
-    }
-
-    loadUsers()
-  }, [])
-
-  return (
-    <>
-    <h1>Hola, empezando prueba tecnica</h1>
-    </>
+  return(
+    <AppRouter/>
   )
 }
 
