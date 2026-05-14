@@ -1,0 +1,56 @@
+.user-detail {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  /* BOTÓN VOLVER */
+  .user-detail-header a {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+  }
+
+  /* CARD PRINCIPAL */
+  .user-card-detail {
+    background: white;
+    border-radius: 14px;
+    padding: 2rem;
+  
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  
+    gap: 0.5rem;
+  }
+  
+  /* AVATAR */
+  .user-card-detail img {
+    width: 120px;
+    height: 120px;
+  
+    border-radius: 50%;
+    object-fit: cover;
+  
+    border: 4px solid #e5e7eb;
+  }
+  
+  /* NOMBRE */
+  .user-card-detail h1 {
+    font-size: 1.4rem;
+    margin: 0.5rem 0;
+  }
+  
+  /* INFO TEXT */
+  .user-card-detail p {
+    margin: 0;
+    color: #555;
+    font-size: 0.95rem;
+  }

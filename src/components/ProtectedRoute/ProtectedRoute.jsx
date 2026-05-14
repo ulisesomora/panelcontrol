@@ -6,7 +6,7 @@ function ProtectedRoute({ children }) {
 
   if (loading) return null
   if (!user) {
-    return <Navigate to='/login'/>
+    return <Navigate to='/login' replace/>
   }
 
   return children
